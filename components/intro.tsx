@@ -2,17 +2,19 @@
 
 import Image from "next/image";
 import React from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { BsArrowRight, BsLinkedin } from "react-icons/bs";
+import {BsLine ,BsFacebook} from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
-import { FaGithubSquare } from "react-icons/fa";
+import { Dialog } from "@headlessui/react"; // Modal component
 import { useSectionInView } from "@/lib/hooks";
 import { useActiveSectionContext } from "@/context/active-section-context";
 
 export default function Intro() {
-  const { ref } = useSectionInView("Home", 0.5);
+  const { ref } = useSectionInView("หน้าแรก", 0.5);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <section
@@ -31,18 +33,18 @@ export default function Intro() {
             }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=368&h=368&q=100"
+              src="/images/profile.jpg"
               alt="Ricardo portrait"
-              width="192"
-              height="192"
+              width="250"
+              height="250"
               quality="95"
               priority={true}
-              className="h-24 w-24 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
+              className="h-250 w-250 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
             />
           </motion.div>
 
           <motion.span
-            className="absolute bottom-0 right-0 text-4xl"
+            className="absolute bottom-4 right-0 text-6xl"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
@@ -62,11 +64,9 @@ export default function Intro() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <span className="font-bold">Hello, I'm Ricardo.</span> I'm a{" "}
-        <span className="font-bold">full-stack developer</span> with{" "}
-        <span className="font-bold">8 years</span> of experience. I enjoy
-        building <span className="italic">sites & apps</span>. My focus is{" "}
-        <span className="underline">React (Next.js)</span>.
+        <span className="font-bold">ชื่อ กมลชนก ผลบุญ</span><br></br>
+        <span className="font-bold">อายุ 65 ปี ส่วนสูง 160 ซม.</span><br></br>
+        <span className="font-bold">น้ำหนัก 54 กก.</span><br></br>
       </motion.h1>
 
       <motion.div
@@ -77,42 +77,51 @@ export default function Intro() {
           delay: 0.1,
         }}
       >
-        <Link
-          href="#contact"
-          className="group bg-gray-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition"
-          onClick={() => {
-            setActiveSection("Contact");
-            setTimeOfLastClick(Date.now());
-          }}
-        >
-          Contact me here{" "}
-          <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />
-        </Link>
-
         <a
           className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10"
-          href="/CV.pdf"
+          href="/images/comcard.jpg"
           download
         >
-          Download CV{" "}
+          Download Comcard{" "}
           <HiDownload className="opacity-60 group-hover:translate-y-1 transition" />
         </a>
 
         <a
           className="bg-white p-4 text-gray-700 hover:text-gray-950 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
-          href="https://linkedin.com"
+          href="https://www.facebook.com/golft.freedom?rdid=Nj0T8ud5iJelgNBo&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1YKzGqJZ4z%2F#"
           target="_blank"
         >
-          <BsLinkedin />
+          <BsFacebook />
         </a>
 
         <a
           className="bg-white p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
-          href="https://github.com"
+          onClick={() => setIsOpen(true)}
           target="_blank"
         >
-          <FaGithubSquare />
+          <BsLine />
         </a>
+        <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-black/50" aria-hidden="true" />
+
+        <div className="relative bg-white dark:bg-gray-800 rounded-lg p-6 z-10 max-w-sm w-full">
+          <button
+            className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 dark:hover:text-white"
+            onClick={() => setIsOpen(false)}
+          >
+            ✕
+          </button>
+          <h2 className="text-lg font-semibold mb-4 text-center text-black dark:text-white">สแกน QR เพื่อเพิ่มเพื่อนใน Line</h2>
+          <div className="flex justify-center">
+            <Image
+              src="/images/qr.jpg" // เปลี่ยน path เป็น QR ของคุณ
+              alt="Line QR Code"
+              width={200}
+              height={200}
+            />
+          </div>
+        </div>
+      </Dialog>
       </motion.div>
     </section>
   );
