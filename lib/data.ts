@@ -33,7 +33,7 @@ export const projectsData = [
     title: "งานละครสั้นและภาพยนต์",
     description:
       "ผลงานละครสั้นจากช่อง facebook  เช่น อาเขต มีเดีย , Tgang The series  และรวมถึงงานภาพยนต์ สารคดีที่ชื่อว่า ป่าปิด",
-    tags: ["อาเขต มีเดีย","Tgang The series"],
+    tags: ["อาเขต มีเดีย","Tgang The series","กันและกัน แชนแนล"],
     imageUrl: movieImg,
   },
 ] as const;
@@ -46,9 +46,6 @@ export const tagToYoutubeUrl: Record<string, string> = {
   "เซรั่มกุหลาบ พรีมลดา": "https://www.facebook.com/story.php?story_fbid=354713414046131&id=100085224257951&rdid=LgNFDWLieCGp1GQ9#",
   "อาเขต มีเดีย": "https://www.facebook.com/arcademedia7/videos/540133978616945/?rdid=xjNCEkx238pIQIdk#",
   "Tgang The series": "https://www.facebook.com/share/v/1BaTTZPUdw/",
-
-
-
-
+  "กันและกัน แชนแนล": "https://www.facebook.com/61554368077910/videos/531364196005792/?rdid=j2san9L20T7vtvZy#",
   // เพิ่มเติมได้
 };
